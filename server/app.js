@@ -3,15 +3,16 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const compression = require("compression");
 const path = require("path");
-const app = require("express")();
+const app = express();
+
+app.listen(5000, function() {
+  console.log("Example app listening on port 5000!");
+});
 
 const config = require("./config");
 
 const todo = require("./routes/todo");
-
-app.listen(8000);
 
 mongoose.connect(
   config.database,
@@ -50,6 +51,5 @@ app.use(
     credentials: true
   })
 );
-app.use(compression());
 
 app.use("/api", todo);
