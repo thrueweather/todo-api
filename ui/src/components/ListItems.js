@@ -10,15 +10,15 @@ function ListItems(props) {
     ) {
       if (
         props.filterValue == "all" ||
-        (props.filterValue == "done" && item.isDone) ||
-        (props.filterValue == "notDone" && !item.isDone)
+        (props.filterValue == "done" && item.status) ||
+        (props.filterValue == "notDone" && !item.status)
       ) {
         return (
           <ItemList
             key={index}
             item={item}
             index={index}
-            isDone={item.isDone}
+            status={item.status}
             setIsEditActive={props.setIsEditActive}
             setNewTitle={props.setNewTitle}
             setNewDescription={props.setNewDescription}

@@ -17,13 +17,13 @@ function ItemList(props) {
 
   const onDoneItem = index => {
     let arr = [...props.list];
-    arr[index].isDone = !props.list[index].isDone;
+    arr[index].status = !props.list[index].status;
 
     props.setList(arr);
   };
 
   return (
-    <div className={`list-item ${!props.isDone ? "not-done" : "done"}`}>
+    <div className={`list-item ${!props.status ? "not-done" : "done"}`}>
       <div className="list-info">
         <h4 className="list-item-title">{props.item.title}</h4>
         <p>{props.item.description}</p>

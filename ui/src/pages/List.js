@@ -8,28 +8,7 @@ import axios from "axios";
 import "../scss/list.scss";
 
 function List() {
-  const [list, setList] = useState([
-    {
-      title: "test",
-      description: "test",
-      isDone: false
-    },
-    {
-      title: "test2",
-      description: "test2",
-      isDone: false
-    },
-    {
-      title: "test3",
-      description: "test3",
-      isDone: false
-    },
-    {
-      title: "test4",
-      description: "test4",
-      isDone: false
-    }
-  ]);
+  const [list, setList] = useState(null);
 
   const [isAddActive, setIsAddActive] = useState(false);
   const [newTitle, setNewTitle] = useState("");
@@ -40,38 +19,45 @@ function List() {
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
-    // axios.post('http://localhost:5000/api/create-todo', {
-    //        title: 'title',
-    //         description: 'description',
-    //         isDone: false
-    // })
-    axios.post("http://localhost:5000/api/remove-all-todos");
-    axios.get("http://localhost:5000/api/todo-list").then(response => {
-      const newList = response.data;
-      setList(newList);
-      console.log(list);
-    });
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const response = await axios.get("http://localhost:5000/api/todo-list");  
+    const newList = response.data;
+    setList(newList);
+  };
+
+  const createToDo = async () =>
+    await axios.post("http://localhost:5000/api/create-todo", {
+      title: "title",
+      description: "description",
+      status: false
   });
 
   return (
     <div className={`list ${isEditActive ? "has_modal" : ""}`}>
       <div className="list-header">
-        {/* <Filter setFilterValue={setFilterValue} />
-        <Search setSearchValue={setSearchValue} /> */}
+        <Filter setFilterValue={setFilterValue} />
+        <Search setSearchValue={setSearchValue} />
       </div>
+      
+      {list !== null ?
+        <ListItems
+          searchValue={searchValue}
+          filterValue={filterValue}
+          setIsEditActive={setIsEditActive}
+          setNewTitle={setNewTitle}
+          setNewDescription={setNewDescription}
+          setCurrentIndex={setCurrentIndex}
+          setList={setList}
+          list={list}
+        />
+        : null
+      }
+     
 
-      {/* <ListItems
-        searchValue={searchValue}
-        filterValue={filterValue}
-        setIsEditActive={setIsEditActive}
-        setNewTitle={setNewTitle}
-        setNewDescription={setNewDescription}
-        setCurrentIndex={setCurrentIndex}
-        setList={setList}
-        list={list}
-      /> */}
-
-      {/* <AddItem
+      <AddItem
         isAddActive={isAddActive}
         setIsAddActive={setIsAddActive}
         newTitle={newTitle}
@@ -81,9 +67,9 @@ function List() {
         setIsAddActive={setIsAddActive}
         list={list}
         setList={setList}
-      /> */}
+      />
 
-      {/* <EditItem
+      <EditItem
         isEditActive={isEditActive}
         newTitle={newTitle}
         setNewTitle={setNewTitle}
@@ -94,7 +80,7 @@ function List() {
         setIsEditActive={setIsEditActive}
         setCurrentIndex={setCurrentIndex}
         currentIndex={currentIndex}
-      /> */}
+      />
     </div>
   );
 }

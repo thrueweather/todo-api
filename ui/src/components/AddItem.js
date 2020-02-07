@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 
 function AddItem(props) {
 
@@ -8,26 +9,24 @@ function AddItem(props) {
         props.setNewDescription('')
     }
 
-    const onSaveNewItem = () => { 
-        if(props.newTitle.length > 0 && props.newDescription.length){
-            const arr = [...props.list];
-            
-            let newItem = {
-                title: props.newTitle,
-                description: props.newDescription,
-                isDone: false
-            }
-            arr.push(newItem)
+    const onSaveNewItem = async () => { 
+        await axios.post("http://localhost:5000/api/create-todo", {
+            title: props.newTitle,
+            description: props.newDescription,
+            status: false
+        });
 
-            props.setIsAddActive(false);
-            props.setList(arr);
-            props.setNewTitle('');
-            props.setNewDescription('')
-        }
-    } 
+        const response = await axios.get("http://localhost:5000/api/todo-list");
+        const newList = response.data;
+        props.setList(newList);
+
+        props.setIsAddActive(false);
+        props.setNewTitle(''); 
+        props.setNewDescription('');      
+    }              
 
     if(props.isAddActive){
-        return ( <div  className="list-add-item-info modal add-modal">
+        return ( <div className="list-add-item-info modal add-modal">
             <label htmlFor="title">Title</label>
             <input type="text" value={props.newTitle} onChange={e => props.setNewTitle(e.target.value)} name="title" id="title"/>
             <label htmlFor="description">Description</label>
