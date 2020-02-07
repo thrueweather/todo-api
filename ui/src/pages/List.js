@@ -25,6 +25,7 @@ function List() {
   const getData = async () => {
     const response = await axios.get("http://localhost:5000/api/todo-list");  
     const newList = response.data;
+    console.log(newList);
     setList(newList);
   };
 
@@ -67,6 +68,7 @@ function List() {
         setIsAddActive={setIsAddActive}
         list={list}
         setList={setList}
+        getData={getData}
       />
 
       <EditItem
@@ -80,6 +82,7 @@ function List() {
         setIsEditActive={setIsEditActive}
         setCurrentIndex={setCurrentIndex}
         currentIndex={currentIndex}
+        getData={getData}
       />
     </div>
   );

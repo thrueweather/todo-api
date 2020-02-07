@@ -1,13 +1,14 @@
 import React from "react";
+import axios from 'axios';
 
 function EditItem(props) {
-  const onSaveEditItem = () => {
-    let arr = [...props.list];
-    let index = props.currentIndex;
-    arr[index].title = props.newTitle;
-    arr[index].description = props.newDescription;
+  const onSaveEditItem = async () => {
+    await axios.post('http://localhost:5000/api/update-todo/' + props.currentIndex, {
+      title: props.newTitle,
+      description: props.newDescription,
+    })
+    props.getData();
 
-    props.setList(arr);
     props.setIsEditActive(false);
     props.setCurrentIndex(null);
   };

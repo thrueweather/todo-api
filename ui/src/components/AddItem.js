@@ -15,11 +15,8 @@ function AddItem(props) {
             description: props.newDescription,
             status: false
         });
-
-        const response = await axios.get("http://localhost:5000/api/todo-list");
-        const newList = response.data;
-        props.setList(newList);
-
+        props.getData();
+        
         props.setIsAddActive(false);
         props.setNewTitle(''); 
         props.setNewDescription('');      

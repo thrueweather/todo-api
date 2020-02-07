@@ -17,7 +17,7 @@ function ListItems(props) {
           <ItemList
             key={index}
             item={item}
-            index={index}
+            index={item._id}
             status={item.status}
             setIsEditActive={props.setIsEditActive}
             setNewTitle={props.setNewTitle}
