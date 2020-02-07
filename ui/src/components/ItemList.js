@@ -1,11 +1,11 @@
 import React from "react";
 
 function ItemList(props) {
-  const onEditItem = (item, index) => {
+  const onEditItem = (item) => {
     props.setIsEditActive(true);
-    props.setNewTitle(item.title);
-    props.setNewDescription(item.description);
-    props.setCurrentIndex(index);
+    props.setTodo(item)
+    // props.setNewTitle(item.title);
+    // props.setNewDescription(item.description);
   };
 
   const onRemoveItem = index => {
@@ -29,7 +29,7 @@ function ItemList(props) {
         <p>{props.item.description}</p>
       </div>
       <div className="btn-group">
-        <button onClick={() => onEditItem(props.item, props.index)}>
+        <button onClick={() => onEditItem(props.item)}>
           Edit
         </button>
         <button onClick={() => onRemoveItem(props.index)}>Remove</button>

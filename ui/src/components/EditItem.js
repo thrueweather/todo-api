@@ -1,16 +1,22 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 
 function EditItem(props) {
   const onSaveEditItem = async () => {
-    await axios.post('http://localhost:5000/api/update-todo/' + props.currentIndex, {
-      title: props.newTitle,
-      description: props.newDescription,
-    })
+    await axios.post(
+      `http://localhost:5000/api/update-todo/${props.todo._id}`,
+      {
+        title: props.todo.title,
+        description: props.todo.description
+      }
+    );
     props.getData();
 
     props.setIsEditActive(false);
-    props.setCurrentIndex(null);
+  };
+
+  const handleChangeTodo = key => e => {
+    props.setTodo({ ...props.todo, [key]: e.target.value });
   };
 
   if (props.isEditActive)
@@ -22,15 +28,15 @@ function EditItem(props) {
           type="text"
           name="title-edit"
           id="title-edit"
-          value={props.newTitle}
-          onChange={e => props.setNewTitle(e.target.value)}
+          value={props.todo.title}
+          onChange={handleChangeTodo("title")}
         />
         <label htmlFor="description-edit">Description</label>
         <input
           type="text"
           name="description-edit"
-          value={props.newDescription}
-          onChange={e => props.setNewDescription(e.target.value)}
+          value={props.todo.description}
+          onChange={handleChangeTodo("description")}
           id="description-edit"
         />
         <div className="btn-group-secondary">

@@ -5,8 +5,8 @@ function AddItem(props) {
 
     const onCancelAddItem = () => {
         props.setIsAddActive(false);
-        props.setNewTitle('');
-        props.setNewDescription('')
+        // props.setNewTitle('');
+        // props.setNewDescription('')
     }
 
     const onSaveNewItem = async () => { 
@@ -16,18 +16,18 @@ function AddItem(props) {
             status: false
         });
         props.getData();
-        
+
         props.setIsAddActive(false);
-        props.setNewTitle(''); 
-        props.setNewDescription('');      
+        // props.setNewTitle(''); 
+        // props.setNewDescription('');      
     }              
 
     if(props.isAddActive){
         return ( <div className="list-add-item-info modal add-modal">
             <label htmlFor="title">Title</label>
-            <input type="text" value={props.newTitle} onChange={e => props.setNewTitle(e.target.value)} name="title" id="title"/>
+            <input type="text" value={props.newTitle}  name="title" id="title"/>
             <label htmlFor="description">Description</label>
-            <input type="text" value={props.newDescription} onChange={e => props.setNewDescription(e.target.value)} name="description" id="description"/>
+            <input type="text" value={props.newDescription} name="description" id="description"/>
             <button onClick={onCancelAddItem}>Cancel</button>
             <button onClick={onSaveNewItem}>Save</button>
         </div>  ) 
