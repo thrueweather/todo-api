@@ -20,7 +20,7 @@ const removeAllTodo = (req, res, next) => {
 const updateTodo = (req, res, next) => {
   const data = {
     title: req.body.title,
-    status: req.body.status,
+    status: `${req.body.status}`,
     description: req.body.description
   };
   Todo.updateTodo(req.params.id, data, req, res, next);

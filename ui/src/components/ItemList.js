@@ -1,25 +1,23 @@
 import React from "react";
+import axios from "axios";
 
 function ItemList(props) {
-  const onEditItem = (item) => {
+  const onEditItem = item => {
     props.setIsEditActive(true);
-    props.setTodo(item)
-    // props.setNewTitle(item.title);
-    // props.setNewDescription(item.description);
+    props.setTodo(item);
   };
 
-  const onRemoveItem = index => {
-    let arr = [...props.list];
-    arr.splice(index, 1);
-
-    props.setList(arr);
+  const onRemoveItem = async item => {
+    await axios.post(`http://localhost:5000/api/delete-todo/${item._id}`);
+    props.getData();
   };
 
-  const onDoneItem = index => {
-    let arr = [...props.list];
-    arr[index].status = !props.list[index].status;
-
-    props.setList(arr);
+  const onDoneItem = async item => {
+    await axios.post(`http://localhost:5000/api/update-todo/${item._id}`, {
+      title: "from NEW",
+      status: !item.status
+    });
+    props.getData();
   };
 
   return (
@@ -29,11 +27,9 @@ function ItemList(props) {
         <p>{props.item.description}</p>
       </div>
       <div className="btn-group">
-        <button onClick={() => onEditItem(props.item)}>
-          Edit
-        </button>
-        <button onClick={() => onRemoveItem(props.index)}>Remove</button>
-        <button onClick={() => onDoneItem(props.index)}>Done</button>
+        <button onClick={() => onEditItem(props.item)}>Edit</button>
+        <button onClick={() => onRemoveItem(props.item)}>Remove</button>
+        <button onClick={() => onDoneItem(props.item)}>Done</button>
       </div>
     </div>
   );

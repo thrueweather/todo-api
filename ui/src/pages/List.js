@@ -50,6 +50,7 @@ function List() {
           setTodo={setTodo}
           setList={setList}
           list={list}
+          getData={getData}
         />
       ) : null}
 
@@ -58,6 +59,7 @@ function List() {
         setIsAddActive={setIsAddActive}
         list={list}
         setList={setList}
+        todo={todo}
         getData={getData}
       />
 
