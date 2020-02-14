@@ -9,16 +9,14 @@ import "../scss/list.scss";
 
 function List() {
   const [list, setList] = useState(null);
-
   const [isAddActive, setIsAddActive] = useState(false);
-  // const [newTitle, setNewTitle] = useState("");
-  // const [newDescription, setNewDescription] = useState("");
   const [isEditActive, setIsEditActive] = useState(false);
-  const [todo, setTodo] = useState(null)
+  const [todo, setTodo] = useState({ title: '', description: ''})
   const [filterValue, setFilterValue] = useState("all");
   const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
+    // removeAll();
     getData();
   }, []);
 
@@ -33,9 +31,12 @@ function List() {
       title: "title",
       description: "description",
       status: false
-    });
+  });
 
-  return (
+  const removeAll = async () => await axios.post('http://localhost:5000/api/remove-all-todos');
+
+  // console.log(list);
+  return (   
     <div className={`list ${isEditActive ? "has_modal" : ""}`}>
       <div className="list-header">
         <Filter setFilterValue={setFilterValue} />
@@ -50,6 +51,7 @@ function List() {
           setTodo={setTodo}
           setList={setList}
           list={list}
+          todo={todo}
           getData={getData}
         />
       ) : null}
@@ -60,6 +62,7 @@ function List() {
         list={list}
         setList={setList}
         todo={todo}
+        setTodo={setTodo}
         getData={getData}
       />
 

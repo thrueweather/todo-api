@@ -21,8 +21,7 @@ function ListItems(props) {
           status={item.status}
           setIsEditActive={props.setIsEditActive}
           setTodo={props.setTodo}
-          setList={props.setList}
-          list={props.list}
+          todo={props.todo}
           getData={props.getData}
         />
       );
