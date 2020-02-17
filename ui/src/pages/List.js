@@ -6,6 +6,7 @@ import Filter from "../components/Filter";
 import ListItems from "../components/ListItems";
 import axios from "axios";
 import "../scss/list.scss";
+import "antd/dist/antd.css";
 
 function List() {
   const [list, setList] = useState(null);

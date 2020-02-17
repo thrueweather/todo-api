@@ -134,13 +134,6 @@ label{
     margin: 5px 0;
 }
 
-.modal{
-    position: fixed;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-    border-radius: 3px;    
-    background: #fff;
-    padding: 20px;
+form .ant-modal-footer{
+    margin: 24px -24px -24px;
 }
