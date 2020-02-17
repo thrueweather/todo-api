@@ -5,6 +5,7 @@ function ItemList(props) {
   const onEditItem = item => {
     props.setIsEditActive(true);
     props.setTodo(item);
+    // props.setTodo({ title: item.title, description: item.description});
   };
 
   const onRemoveItem = async item => {
