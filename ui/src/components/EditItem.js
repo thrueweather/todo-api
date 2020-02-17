@@ -27,8 +27,6 @@ function EditItem(props) {
     props.setTodo({ ...props.todo, [key]: e.target.value });
   };
 
-  console.log(props.todo);
-
   if (props.isEditActive)
     return (
       <div className="modal edit-modal">
@@ -38,25 +36,24 @@ function EditItem(props) {
           <input
             type="text"
             name="titleEdit"
-            id="title-edit"
-            value={props.todo.title}
+            id="title-edit"           
             onChange={handleChangeTodo("title")}
             ref={register({
-              required: true
+              required: true,
+              value: props.todo.title
             })}
           />
           {errors.titleEdit && "invalid field"}
 
-
           <label htmlFor="description-edit">Description</label>
           <input
             type="text"
-            name="descriptionEdit"
-            value={props.todo.description}
+            name="descriptionEdit"            
             onChange={handleChangeTodo("description")}
             id="description-edit"
             ref={register({
-              required: true
+              required: true,
+              value: props.todo.description
             })}
           />
           {errors.descriptionEdit && "invalid field"}

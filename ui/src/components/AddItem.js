@@ -35,9 +35,9 @@ function AddItem(props) {
           <label htmlFor="title">Title</label>
           <input
             type="text"
-            value={props.todo.title}
-            ref={register({
-              required: true
+            ref={register({ 
+              required: true,
+              value: props.todo.title
             })}
             name="title"
             id="title"
@@ -48,8 +48,10 @@ function AddItem(props) {
           <label htmlFor="description">Description</label>
           <input
             type="text"
-            value={props.todo.description}
-            ref={register({ required: true })}
+            ref={register({ 
+              required: true,
+              value: props.todo.description
+             })}
             name="description"
             id="description"
             onChange={handleAddTodo("description")}
