@@ -1,12 +1,16 @@
-import React from 'react';
+import React from "react";
 import List from "./pages/List";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 
+const store = createStore(rootReducer);
 
 function App() {
   return (
-    <div>
-      <List/>
-    </div>
+    <Provider store={store}>
+      <List />
+    </Provider>
   );
 }
 
